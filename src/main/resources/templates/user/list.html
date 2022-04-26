@@ -2,9 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" 
                 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/css/user/list.css}"> 
     <title>User List</title>
 </head>
@@ -21,7 +18,8 @@
         				<th class="th-width">User Name</th>
         				<th class="th-width">Birthday</th>
         				<th class="th-width">Age</th>
-        				<th class="th-width">Gender</th>        				
+        				<th class="th-width">Gender</th>     
+        				<th></th>        				
         			</tr>
         		</thead>
         		<tbody>
@@ -31,6 +29,9 @@
         				<td th:text="${#dates.format(item.birthday, 'dd/MM/YYYY')}"></td>
         				<td th:text="${item.age}"></td>
         				<td th:text="${item.gender == 1}? 'Male': 'Female'"></td>
+        				<td>
+        					<a class="btn btn-primary" th:href="@{'/user/detail/' + ${item.userId}}">Details</a>
+        				</td>
         			</tr>
         		</tbody>
         	</table>

@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService{
 		return userMapper.findMany();
 	}
 
+	@Override
+	public MUser getUserOne(String userId) {
+		return userMapper.findOne(userId);
+	}
+
 }
