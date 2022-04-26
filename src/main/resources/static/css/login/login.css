@@ -1,0 +1,12 @@
+.form-login, .login{
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.login {
+    margin-top: 5%;
+    border: 1px solid rgb(31, 31, 41);
+    border-radius: 10px;
+}
