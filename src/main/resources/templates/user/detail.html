@@ -13,6 +13,7 @@
 				<h1 class="h2">User Details</h1>
 			</div>
 			<form id="user-detail-form" method="post" class="form-signup" th:object="${userDetailForm}" th:action="@{/user/detail}">
+				<input type="hidden" th:field="*{userId}">
 				<!-- User Detail Information -->
 				<table class="table table-striped table-bordered table-hover">
 					<tbody>
@@ -46,6 +47,10 @@
 						</tr>
 					</tbody>
 				</table>
+				<div class="text-center">
+					<button class="btn btn-danger" type="submit" name="delete">Delete</button>
+					<button class="btn btn-primary" type="submit" name="update">Update</button>
+				</div>
 			</form>
 		</div>
 	</body>

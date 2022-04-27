@@ -26,4 +26,14 @@
     <select id="findOne" resultMap="user">
     	select * from m_user where user_id = #{userId}
     </select>
+
+    <!-- Update user-->
+    <update id="updateOne">
+        update m_user set password= #{password}, userName= #{userName} where user_id= #{userId}
+    </update>
+
+    <!-- Delete user-->
+    <delete id="deleteOne">
+        delete from m_user where user_id= #{userId}
+    </delete>
 </mapper>
