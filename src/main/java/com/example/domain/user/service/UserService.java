@@ -8,7 +8,7 @@ public interface UserService {
 
 	public void signup(MUser user);
 	
-	public List<MUser> getUsers();
+	public List<MUser> getUsers(MUser user);
 	
 	public MUser getUserOne(String userId);
 

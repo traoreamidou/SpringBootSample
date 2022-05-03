@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.repository.UserMapper">
-    <!--User registration-->
-    <insert id="insertOne">
-        insert into m_user(user_id, password, user_name, birthday, age, gender, department_id, role) values(#{userId}, #{password}, #{userName}, #{birthday}, #{age}, #{gender}, #{department_id}, #{role})
-    </insert>
-    
-    <!-- Get user(multiple) -->
-    <!-- resultType specifies the data type of the return value -->
-    <select id="findMany" resultType="MUser">
-    	select * from m_user
-    </select>
-    
     <resultMap type="com.example.domain.user.model.MUser" id="user">
     	<id column="user_id" property="userId" />
     	<result column="password" property="password" />
@@ -21,19 +10,50 @@
     	<result column="gender" property="gender" />
     	<result column="department_id" property="department_id" />
     	<result column="role" property="role" />
+        <association property="department" resultMap="department" />
+        <collection property="salaryList" resultMap="salary" columnPrefix="salary_" />
     </resultMap>
-    
+    <resultMap id="salary" type="com.example.domain.user.model.Salary">
+        <id column="user_id" property="userId"/>
+        <id  column="year_month" property="yearMonth"/>
+        <result column="salary" property="salary"/>
+    </resultMap>
+    <resultMap id="department" type="com.example.domain.user.model.Department">
+        <id column="department_id" property="departmentId" />
+        <result column="department_name" property="departmentName" />
+    </resultMap>   
+    <!--User registration-->
+    <insert id="insertOne">
+        insert into m_user(user_id, password, user_name, birthday, age, gender, department_id, role) values(#{userId}, #{password}, #{userName}, #{birthday}, #{age}, #{gender}, #{department_id}, #{role})
+    </insert>
+
+     <!-- Get user(multiple) -->
+    <!-- resultType specifies the data type of the return value -->
+    <select id="findMany" resultType="MUser">
+    	select * from m_user
+        <where>
+            <if test="userId != null">
+                user_id like '%' || #{userId} || '%' 
+            </if>
+            <if test="userName != null">
+                user_name like '%' || #{userName} || '%'
+            </if>
+        </where>
+    </select>
+        
     <select id="findOne" resultMap="user">
-    	select * from m_user where user_id = #{userId}
+    	select m_user.user_id, m_user.password, m_user.user_name, m_user.birthday, m_user.age, m_user.gender, m_department.department_id, m_department.department_name, t_salary.user_id as salary_user_id, t_salary.year_month as salary_year_month, t_salary.salary as salary_salary 
+        from m_user left join m_department on m_user.department_id = m_department.department_id left join t_salary on m_user.user_id = t_salary.user_id
+        where m_user.user_id = #{userId}
     </select>
 
     <!-- Update user-->
     <update id="updateOne">
-        update m_user set password= #{password}, userName= #{userName} where user_id= #{userId}
+        update m_user set password = #{password}, user_name = #{userName} where user_id = #{userId}
     </update>
 
     <!-- Delete user-->
     <delete id="deleteOne">
-        delete from m_user where user_id= #{userId}
+        delete from m_user where user_id = #{userId}
     </delete>
 </mapper>
