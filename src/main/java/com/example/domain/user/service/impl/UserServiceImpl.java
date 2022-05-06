@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void signup(MUser user) {
-		user.setDepartment_id(1);
+		user.setDepartmentId(1);
 		user.setRole("ROLE_ADMIN");
 		String rawPassword = user.getPassword();
 		user.setPassword(encoder.encode(rawPassword));
