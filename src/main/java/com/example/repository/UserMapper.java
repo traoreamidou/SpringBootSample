@@ -19,4 +19,6 @@ public interface UserMapper {
 	public void updateOne(@Param("userId") String userId, @Param("password") String password, @Param("userName") String userName);
 
 	public void deleteOne(@Param("userId") String userId);
+
+	public MUser findLoginUser(String userId);
 }

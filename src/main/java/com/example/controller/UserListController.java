@@ -28,7 +28,7 @@ public class UserListController {
     public String getUserList(@ModelAttribute UserListForm form, Model model) {
         MUser user = modelMapper.map(form, MUser.class);
     	List<MUser> userList = userService.getUsers(user);
-    	model.addAttribute("userList", userList);
+    	model.addAttribute("userList", userList); 
         return "user/list";
     }
 

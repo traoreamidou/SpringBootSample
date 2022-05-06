@@ -5,6 +5,7 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link rel="stylesheet" th:href="@{/css/user/list.css}">
+		<script th:src="@{/js/user/detail.js}" defer></script>
 		<title>User Details</title>
 	</head>
 	<body>
@@ -56,6 +57,10 @@
 				<div class="text-center">
 					<input class="btn btn-danger" type="submit" name="delete" value="delete" />			
 					<input class="btn btn-primary" type="submit" name="update" value="update" />
+				</div>
+				<div class="text-center mt-2">
+					<button id="btn-delete" class="btn btn-danger" type="button">Delete (Rest)</button>
+					<button id="btn-update" class="btn btn-primary" type="button">Update (Rest)</button>
 				</div>
 				<th:block th:if="*{salaryList != null and salaryList.size() > 0}">
 					<div class="header border-bottom">

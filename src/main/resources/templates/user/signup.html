@@ -8,11 +8,12 @@
     <link rel="stylesheet" th:href="@{/css/user/signup.css}">
     <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" defer></script>
+    <script th:src="@{/js/user/signup.js}" defer></script>
     <title>User Signup</title>
 </head>
 <body class="bg-light">
    <div class="signup">
-        <form th:action="@{/user/signup}" method="post" id="signup-form" class="form-signup" th:object="${signupForm}">
+        <form action="/user/signup" method="post" id="signup-form" class="form-signup" th:object="${signupForm}">
             <h1 class="text-center" th:text="#{user.signup.title}"></h1>
             <div class="form-group">
                 <label for="userId" th:text="#{userId}"></label>
@@ -47,6 +48,8 @@
                 <div class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
             </div>
             <input type="submit" th:value="#{user.signup.btn}" class="btn btn-primary w-100 mt-3">
+            <button type="button" th:value="#{user.signup.btn}" class="btn btn-primary w-100 mt-3" id="btn-signup">Signup (Rest)</button>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>
    </div>
 </body>

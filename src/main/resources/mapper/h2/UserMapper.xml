@@ -30,13 +30,14 @@
      <!-- Get user(multiple) -->
     <!-- resultType specifies the data type of the return value -->
     <select id="findMany" resultType="MUser">
-    	select * from m_user
+    	select * 
+        from m_user
         <where>
             <if test="userId != null">
                 user_id like '%' || #{userId} || '%' 
             </if>
             <if test="userName != null">
-                user_name like '%' || #{userName} || '%'
+               and user_name like '%' || #{userName} || '%'
             </if>
         </where>
     </select>
@@ -56,4 +57,11 @@
     <delete id="deleteOne">
         delete from m_user where user_id = #{userId}
     </delete>
+
+    <!-- Get login user information-->
+    <select id="findLoginUser" resultType="MUser">
+        select * 
+        from m_user
+        where user_id = #{userId}
+    </select>
 </mapper>
